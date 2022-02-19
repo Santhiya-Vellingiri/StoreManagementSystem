@@ -20,32 +20,30 @@ namespace StoreManagementSystem
             set
             {
                 isExpand = value;
-                ExpanderWidth = isExpand ? 150 : 25;
                 OnPropertyChanged(nameof(IsExpanded));
             }
         }
-         private int expanderWidth=25;
-        public int ExpanderWidth
-        {
-            get
-            {
-                return expanderWidth;
-            }
-            set
-            {
-                expanderWidth = value;
-                OnPropertyChanged(nameof(ExpanderWidth));
-            }
-        }
+     
         public BaseCommand CollapsedTheMenuItems { get; set; }
+        public BaseCommand ExpandTheMenuItems { get; set; }
         public StoreManagementSystemViewModel()
         {
             CollapsedTheMenuItems = new BaseCommand(CollapsetheExpanderMethod);
+            ExpandTheMenuItems = new BaseCommand(ExpandTheMenuItemsMethod);
         }
         public void CollapsetheExpanderMethod(object obj)
         {
             IsExpanded = false;
         }
+        public void ExpandTheMenuItemsMethod(object obj)
+        {
+            IsExpanded = true;
+        }
+
+
+
+
+
         #region PropertyChanged
         public event PropertyChangedEventHandler PropertyChanged;
         public void OnPropertyChanged(string propertyName)
