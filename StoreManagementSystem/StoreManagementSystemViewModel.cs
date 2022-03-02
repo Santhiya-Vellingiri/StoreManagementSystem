@@ -1,6 +1,9 @@
-﻿using System;
+﻿using LumenWorks.Framework.IO.Csv;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Data;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -23,13 +26,62 @@ namespace StoreManagementSystem
                 OnPropertyChanged(nameof(IsExpanded));
             }
         }
-     
+        private object selectedPage;
+        public object SelectedPage
+        {
+            get
+            {
+                return selectedPage;
+            }
+            set
+            {
+                selectedPage = value;
+                OnPropertyChanged(nameof(SelectedPage));
+            }
+        }
+        private ProductDetails productDetails = new ProductDetails();
+        public ProductDetails AvailableProducts
+        {
+            get
+            {
+                return productDetails;
+            }
+            set
+            {
+                productDetails = value;
+                OnPropertyChanged(nameof(AvailableProducts));
+            }
+        }
+
         public BaseCommand CollapsedTheMenuItems { get; set; }
         public BaseCommand ExpandTheMenuItems { get; set; }
+        public BaseCommand NavigateToProductPage { get; set; }
         public StoreManagementSystemViewModel()
         {
             CollapsedTheMenuItems = new BaseCommand(CollapsetheExpanderMethod);
             ExpandTheMenuItems = new BaseCommand(ExpandTheMenuItemsMethod);
+            NavigateToProductPage = new BaseCommand(NavigateToProductPageMethod);
+            GetProdutDetais();
+        }
+        public void NavigateToProductPageMethod(object obj)
+        {
+            SelectedPage = new ProductView();
+        }
+        public void GetProdutDetais()
+        {
+            try
+            {
+            var csvTable = new DataTable();
+            using (var csvReader = new CsvReader(new StreamReader(System.IO.File.OpenRead(@"D:\CSVFolder\CSVFile.csv")), true))
+            {
+                csvTable.Load(csvReader);
+            }
+            for (int i = 0; i < csvTable.Rows.Count; i++)
+            {
+                //searchParameters.Add(new SearchParameters { FirstName = csvTable.Rows[i][0].ToString(), LastName = csvTable.Rows[i][1].ToString(), Email = csvTable.Rows[i][2].ToString() });
+            }
+            }
+            catch (Exception e) { }
         }
         public void CollapsetheExpanderMethod(object obj)
         {
