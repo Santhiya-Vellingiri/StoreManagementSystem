@@ -61,16 +61,17 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="AddProducts.xaml.cs">
-      <DependentUpon>AddProducts.xaml</DependentUpon>
+    <Compile Include="View\AddProduct.xaml.cs">
+      <DependentUpon>AddProduct.xaml</DependentUpon>
     </Compile>
-    <Compile Include="BaseCommand.cs" />
-    <Compile Include="ProductDetails.cs" />
-    <Compile Include="ProductView.xaml.cs">
+    <Compile Include="Model\BaseCommand.cs" />
+    <Compile Include="Model\ProductDetails.cs" />
+    <Compile Include="ViewModel\ProductDetailsViewModel.cs" />
+    <Compile Include="View\ProductView.xaml.cs">
       <DependentUpon>ProductView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="StoreManagementSystemViewModel.cs" />
-    <Page Include="AddProducts.xaml">
+    <Compile Include="ViewModel\StoreManagementSystemViewModel.cs" />
+    <Page Include="View\AddProduct.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -86,7 +87,7 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Page Include="ProductView.xaml">
+    <Page Include="View\ProductView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -118,5 +119,6 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
